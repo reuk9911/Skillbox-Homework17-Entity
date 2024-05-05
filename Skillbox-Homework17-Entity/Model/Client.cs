@@ -14,15 +14,15 @@ namespace Skillbox_Homework17_Entity.Model
             Purchases = new HashSet<Purchase>();
         }
 
-        [Required]
+        //[Required]
         [StringLength(20)]
         public string lastName { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(20)]
         public string firstName { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(20)]
         public string middleName { get; set; }
 
