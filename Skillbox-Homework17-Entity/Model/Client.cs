@@ -1,23 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Skillbox_Homework17_Entity.Model
 {
-    public class Client
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    public partial class Client
     {
-        public int Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Client()
+        {
+            Purchases = new HashSet<Purchase>();
+        }
 
-        public string Email { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string MiddleName { get; set; }
-        public string PhoneNumber { get; set; }
-        
+        [Required]
+        [StringLength(20)]
+        public string lastName { get; set; }
 
-        public virtual List<Purchase> Purchases { get; set; }
+        [Required]
+        [StringLength(20)]
+        public string firstName { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string middleName { get; set; }
+
+        [StringLength(12)]
+        public string phone { get; set; }
+
+        [Key]
+        [StringLength(40)]
+        public string email { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Purchase> Purchases { get; set; }
     }
 }

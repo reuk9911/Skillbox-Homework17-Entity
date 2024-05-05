@@ -1,25 +1,25 @@
-﻿using System.Data.Entity;
 using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Skillbox_Homework17_Entity.Model;
-using System.Data.SqlClient;
 
 namespace Skillbox_Homework17_Entity.Data
 {
-    public class ApplicationContext: DbContext
+    public partial class ApplicationContext : DbContext
     {
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<Purchase> Purchases { get; set; }
-
-
-        public ApplicationContext(): base("DbConnection")
+        public ApplicationContext(): base("name=DbConnection")
         {
-            if (!Database.Exists())
-                Database.Create();
         }
 
+        public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<Purchase> Purchases { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Client>()
+                .Property(e => e.phone)
+                .IsUnicode(false);
+        }
     }
 }
