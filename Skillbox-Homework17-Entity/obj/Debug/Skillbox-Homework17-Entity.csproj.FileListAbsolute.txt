@@ -23,5 +23,6 @@ C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\Skillbox-Homework17-Entity.exe
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\Skillbox-Homework17-Entity.pdb
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\Skillbox-Homework17-Entity_Content.g.cs
-C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\bin\Debug\Model\ClientsDb.mdf
-C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\bin\Debug\Model\ClientsDb_log.ldf
+C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\bin\Debug\Model\ClientsDb_17.mdf
+C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\bin\Debug\Model\ClientsDb_17_log.ldf

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model/clientsdb.mdf")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model/clientsdb_log.ldf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model/clientsdb_17.mdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model/clientsdb_17_log.ldf")]
 
 

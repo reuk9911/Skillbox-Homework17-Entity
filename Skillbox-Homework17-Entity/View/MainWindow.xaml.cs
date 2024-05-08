@@ -1,4 +1,5 @@
-﻿using Skillbox_Homework17_Entity.Data;
+﻿//using Skillbox_Homework17_Entity.Model.Data;
+using Skillbox_Homework17_Entity.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,6 @@ namespace Skillbox_Homework17_Entity.View
         public MainWindow()
         {
             InitializeComponent();
-            ApplicationContext a = new ApplicationContext();
         }
     }
 }

@@ -99,8 +99,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Client.cs" />
-    <Compile Include="Data\ApplicationContext.cs" />
+    <Compile Include="Model\Data\ApplicationContext.cs" />
+    <Compile Include="Model\DataWorker.cs" />
     <Compile Include="Model\Purchase.cs" />
+    <Compile Include="Model\RelayCommand.cs" />
     <Compile Include="ViewModel\DataManageVM.cs" />
     <Compile Include="View\AddNewClient.xaml.cs">
       <DependentUpon>AddNewClient.xaml</DependentUpon>
@@ -141,12 +143,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\ClientsDb.mdf">
+    <Content Include="Model\ClientsDb_17.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Model\ClientsDb_log.ldf">
+    <Content Include="Model\ClientsDb_17_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>ClientsDb.mdf</DependentUpon>
+      <DependentUpon>ClientsDb_17.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
