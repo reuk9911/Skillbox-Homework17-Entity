@@ -4,8 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Skillbox_Homework17_Entity.View"
+        xmlns:vm="clr-namespace:Skillbox_Homework17_Entity.ViewModel"
         mc:Ignorable="d"
-        Title="Добавить покупку" Height="300" Width="300">
+        Title="Добавить покупку" Height="300" Width="300"
+        Name ="AddNewPurchaseWnd">
+    <Window.DataContext>
+        <vm:DataManageVM/>
+    </Window.DataContext>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -18,10 +24,14 @@
             <TextBlock Text="Email пользователя"/>
             <ComboBox Text=""/>
             <TextBlock Text="Код продукта"/>
-            <TextBox Text=""/>
+            <TextBox Text="{Binding PurchaseProductCode}"/>
             <TextBlock Text="Наименование продукта"/>
-            <TextBox Text=""/>
+            <TextBox Text="{Binding PurchaseProductName}"/>
         </StackPanel>
-        <Button Grid.Row="1" Content="Добавить"/>
+        <Button 
+            Grid.Row="1" 
+            Content="Добавить"
+            Command="{Binding AddNewPurchase}"
+            CommandParameter="{Binding ElementName=AddNewPurchaseWnd}"/>
     </Grid>
 </Window>

@@ -20,7 +20,7 @@ namespace Skillbox_Homework17_Entity.Model
         /// <param name="Phone">Номер телефона</param>
         /// <returns></returns>
         public static string AddClient(string Email,
-            string LastName, string FirstName, string MiddleName, string Phone)
+            string LastName = "", string FirstName = "", string MiddleName = "", string Phone = "")
         {
             string result = "Клиент с данным Email уже существует";
             using (ApplicationContext db = new ApplicationContext())
@@ -50,7 +50,7 @@ namespace Skillbox_Homework17_Entity.Model
         /// <param name="ProductCode">Код продукта</param>
         /// <param name="ProductName">Наименование продукта</param>
         /// <returns></returns>
-        public static string AddPurchase(string Email, string ProductCode, string ProductName)
+        public static string AddPurchase(string Email, string ProductCode = "", string ProductName = "")
         {
             string result = "Клиента с данным Email не существует";
             using (ApplicationContext db = new ApplicationContext())
@@ -156,7 +156,7 @@ namespace Skillbox_Homework17_Entity.Model
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var result = db.Purchases.Where(e=>e.email == Email).ToList();
+                var result = db.Purchases.Where(e => e.email == Email).ToList();
                 return result;
             }
         }

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Skillbox_Homework17_Entity.ViewModel
 {
@@ -42,6 +44,16 @@ namespace Skillbox_Homework17_Entity.ViewModel
                 NotifyPropertyChanged(nameof(AllPurchases));
             }
         }
+
+        public string ClientEmail { get; set; }
+        public string ClientFirstName { get; set; }
+        public string ClientLastName { get; set; }
+        public string ClientMiddleName { get; set; }
+        public string ClientPhone { get; set; }
+
+        public string PurchaseClientEmail { get; set; }
+        public string PurchaseProductCode { get; set; }
+        public string PurchaseProductName { get; set; }
         #endregion
 
         #region Конструкторы
@@ -112,29 +124,56 @@ namespace Skillbox_Homework17_Entity.ViewModel
         #endregion
 
         #region Команды Добавления
-        private RelayCommand openAddNewClient;
-        public RelayCommand OpenAddNewClient
+
+        private RelayCommand addNewClient;
+        public RelayCommand AddNewClient
         {
             get
             {
-                return openAddNewClient ?? new RelayCommand(obj =>
+                return addNewClient ?? new RelayCommand(obj =>
                 {
+                    Window wnd = obj as Window;
+                    string resultStr = "";
+                    if (ClientEmail == null || (!ClientEmail.Contains("@")))
+                    {
+                        SetRedBlockControll(wnd, "EmailBlock");
+                    }
+                    else
+                    {
+                        resultStr = DataWorker.AddClient(
+                            ClientEmail,ClientLastName, ClientFirstName, ClientMiddleName, ClientPhone);
+                        //MessageBox.Show(resultStr);
+                        wnd.Close();
+                    }
                 });
             }
         }
 
-        private RelayCommand openAddNewPurchase;
-        public RelayCommand OpenAddNewPurchase
+
+
+        private RelayCommand addNewPurchase;
+        public RelayCommand AddNewPurchase
         {
             get
             {
-                return openAddNewPurchase ?? new RelayCommand(obj =>
+                return addNewPurchase ?? new RelayCommand(obj =>
                 {
                 });
             }
         }
 
         #endregion
+        private void SetRedBlockControll(Window wnd, string blockName)
+        {
+            Control block = wnd.FindName(blockName) as Control;
+            block.BorderBrush = Brushes.Red;
+        }
+
+        //private void ShowMessageToUser(string message)
+        //{
+        //    MessageView messageView = new MessageView(message);
+        //    SetCenterPositionAndOpen(messageView);
+        //}
 
     }
 }
