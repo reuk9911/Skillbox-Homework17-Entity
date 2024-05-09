@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Skillbox_Homework17_Entity.View"
         xmlns:vm="clr-namespace:Skillbox_Homework17_Entity.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
@@ -23,7 +24,8 @@
             Margin="5" 
             ItemsSource="{Binding AllClients}"
             SelectionMode="Single" 
-            AutoGenerateColumns="False">
+            AutoGenerateColumns="False"
+            SelectedItem="{Binding SelectedItem}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Email" Binding="{Binding email}"/>
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding lastName}"/>
@@ -42,11 +44,13 @@
             SelectionMode="Single" 
             AutoGenerateColumns="False">
             <DataGrid.Columns>
+                
                 <DataGridTextColumn Header="Id" Binding="{Binding id}"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding email}"/>
                 <DataGridTextColumn Header="Код" Binding="{Binding productCode}"/>
                 <DataGridTextColumn Header="Наименование" Binding="{Binding productName}"/>
             </DataGrid.Columns>
+            
         </DataGrid>
         <!-- *** PurchasesGrid *** -->
 

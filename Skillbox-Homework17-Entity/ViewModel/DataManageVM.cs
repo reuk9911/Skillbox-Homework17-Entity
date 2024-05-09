@@ -2,6 +2,7 @@
 using Skillbox_Homework17_Entity.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -12,15 +13,15 @@ using System.Windows.Media;
 
 namespace Skillbox_Homework17_Entity.ViewModel
 {
-    public class DataManageVM :INotifyPropertyChanged
+    public class DataManageVM : INotifyPropertyChanged
     {
         #region Поля и свойства
-        private List<Client> allClients;
+        private ObservableCollection<Client> allClients;
 
         /// <summary>
         /// все Клиенты
         /// </summary>
-        public List<Client> AllClients 
+        public ObservableCollection<Client> AllClients 
         { 
             get { return allClients; }
             set
@@ -30,12 +31,12 @@ namespace Skillbox_Homework17_Entity.ViewModel
             }
         }
 
-        private List<Purchase> allPurchases;
+        private ObservableCollection<Purchase> allPurchases;
 
         /// <summary>
         /// все Клиенты
         /// </summary>
-        public List<Purchase> AllPurchases
+        public ObservableCollection<Purchase> AllPurchases
         {
             get { return allPurchases; }
             set
@@ -54,13 +55,16 @@ namespace Skillbox_Homework17_Entity.ViewModel
         public string PurchaseClientEmail { get; set; }
         public string PurchaseProductCode { get; set; }
         public string PurchaseProductName { get; set; }
+
+        public Client SelectedItem { get; set; }
+
         #endregion
 
         #region Конструкторы
         public DataManageVM()
         {
-            allClients = DataWorker.GetAllClients();
-            allPurchases = DataWorker.GetAllPurchases();
+            allClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
+            allPurchases = new ObservableCollection<Purchase>(DataWorker.GetAllPurchases());
         }
         #endregion
 
@@ -85,14 +89,20 @@ namespace Skillbox_Homework17_Entity.ViewModel
             window.ShowDialog();
         }
 
+
+        #endregion
+
+        #region PropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null) 
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
         #endregion
 
         #region Команды открытия окон
@@ -143,6 +153,8 @@ namespace Skillbox_Homework17_Entity.ViewModel
                         resultStr = DataWorker.AddClient(
                             ClientEmail,ClientLastName, ClientFirstName, ClientMiddleName, ClientPhone);
                         //MessageBox.Show(resultStr);
+                        allClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
+                        
                         wnd.Close();
                     }
                 });
@@ -163,6 +175,8 @@ namespace Skillbox_Homework17_Entity.ViewModel
         }
 
         #endregion
+
+        
         private void SetRedBlockControll(Window wnd, string blockName)
         {
             Control block = wnd.FindName(blockName) as Control;

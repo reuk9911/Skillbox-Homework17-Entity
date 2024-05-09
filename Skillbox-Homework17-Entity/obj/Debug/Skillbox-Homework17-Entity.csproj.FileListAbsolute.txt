@@ -28,3 +28,8 @@ C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\bin\Debug\Model\ClientsDb_17_log.ldf
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\View\MessageView.g.cs
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\View\MessageView.baml
+C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\bin\Debug\ru\EntityFramework.SqlServer.resources.dll

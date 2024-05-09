@@ -1,4 +1,5 @@
 ﻿//using Skillbox_Homework17_Entity.Model.Data;
+using Skillbox_Homework17_Entity.Model;
 using Skillbox_Homework17_Entity.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -26,5 +27,6 @@ namespace Skillbox_Homework17_Entity.View
         {
             InitializeComponent();
         }
+
     }
 }
