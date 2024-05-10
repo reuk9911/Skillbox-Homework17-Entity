@@ -21,8 +21,8 @@ namespace Skillbox_Homework17_Entity.ViewModel
         /// <summary>
         /// все Клиенты
         /// </summary>
-        public ObservableCollection<Client> AllClients 
-        { 
+        public ObservableCollection<Client> AllClients
+        {
             get { return allClients; }
             set
             {
@@ -56,7 +56,6 @@ namespace Skillbox_Homework17_Entity.ViewModel
         public string PurchaseProductCode { get; set; }
         public string PurchaseProductName { get; set; }
 
-        public Client SelectedItem { get; set; }
 
         #endregion
 
@@ -68,9 +67,9 @@ namespace Skillbox_Homework17_Entity.ViewModel
         }
         #endregion
 
-        
+
         #region Методы открытия окон
-        private void OpenAddNewClientWindowMethod() 
+        private void OpenAddNewClientWindowMethod()
         {
             AddNewClient newClientWindow = new AddNewClient();
             SetCenterPositionAndOpen(newClientWindow);
@@ -151,10 +150,10 @@ namespace Skillbox_Homework17_Entity.ViewModel
                     else
                     {
                         resultStr = DataWorker.AddClient(
-                            ClientEmail,ClientLastName, ClientFirstName, ClientMiddleName, ClientPhone);
+                            ClientEmail, ClientLastName, ClientFirstName, ClientMiddleName, ClientPhone);
                         //MessageBox.Show(resultStr);
                         allClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
-                        
+
                         wnd.Close();
                     }
                 });
@@ -176,7 +175,25 @@ namespace Skillbox_Homework17_Entity.ViewModel
 
         #endregion
 
-        
+        #region Команды редактирования
+
+        private RelayCommand editClient;
+        public RelayCommand EditClient
+        {
+            get
+            {
+                return editClient ?? new RelayCommand(obj =>
+                {
+                    Client c = obj as Client;
+                    string resultStr = DataWorker.EditClient(c);
+                    //MessageBox.Show(resultStr);
+                    allClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
+                });
+            }
+        }
+
+        #endregion
+
         private void SetRedBlockControll(Window wnd, string blockName)
         {
             Control block = wnd.FindName(blockName) as Control;

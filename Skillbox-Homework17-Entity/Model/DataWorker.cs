@@ -96,20 +96,18 @@ namespace Skillbox_Homework17_Entity.Model
             return result;
         }
 
-        public static string EditClient(Client OldClient, string Email,
-            string LastName, string FirstName, string MiddleName, string Phone)
+        public static string EditClient(Client EditedClient)
         {
             string result = "Такого клиента не существует";
             using (ApplicationContext db = new ApplicationContext())
             {
-                Client client = db.Clients.FirstOrDefault(e => e.email == OldClient.email);
+                Client client = db.Clients.FirstOrDefault(e => e.email == EditedClient.email);
                 if (client != null)
                 {
-                    client.firstName = FirstName;
-                    client.lastName = LastName;
-                    client.middleName = MiddleName;
-                    client.email = Email;
-                    client.phone = Phone;
+                    client.firstName = EditedClient.firstName;
+                    client.lastName = EditedClient.lastName;
+                    client.middleName = EditedClient.middleName;
+                    client.phone = EditedClient.phone;
                     db.SaveChanges();
                     result = "Сделано!";
                 }

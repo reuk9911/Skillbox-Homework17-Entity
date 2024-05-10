@@ -24,15 +24,24 @@
             Margin="5" 
             ItemsSource="{Binding AllClients}"
             SelectionMode="Single" 
-            AutoGenerateColumns="False"
-            SelectedItem="{Binding SelectedItem}">
+            AutoGenerateColumns="False">
+            <!--SelectedItem="{Binding CurrentClient, Mode=OneWayToSource}"-->
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Email" Binding="{Binding email}"/>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding lastName}"/>
-                <DataGridTextColumn Header="Имя" Binding="{Binding firstName}"/>
-                <DataGridTextColumn Header="Отчество" Binding="{Binding middleName}"/>
-                <DataGridTextColumn Header="Телефон" Binding="{Binding phone}"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding email, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding lastName, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding firstName, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding middleName, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding phone, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="RowEditEnding">
+                    <i:InvokeCommandAction
+                            Command="{Binding EditClient}"
+                            CommandParameter="{Binding Path=SelectedItem, 
+                                RelativeSource={RelativeSource Mode=FindAncestor, 
+                                AncestorType=DataGrid}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </DataGrid>
         <!-- *** ClientsGrid *** -->
 
