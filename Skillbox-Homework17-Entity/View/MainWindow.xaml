@@ -19,27 +19,39 @@
             <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
         <!-- ClientsGrid -->
-        <DataGrid 
+        <DataGrid x:Name="add" 
             Grid.Column="0" 
             Margin="5" 
-            ItemsSource="{Binding AllClients}"
+            ItemsSource="{Binding AllClients,  UpdateSourceTrigger=PropertyChanged}"
+            
             SelectionMode="Single" 
             AutoGenerateColumns="False">
-            <!--SelectedItem="{Binding CurrentClient, Mode=OneWayToSource}"-->
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Email" Binding="{Binding email, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding lastName, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Имя" Binding="{Binding firstName, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Отчество" Binding="{Binding middleName, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Телефон" Binding="{Binding phone, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding email, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding lastName, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding firstName, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding middleName, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding phone, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="RowEditEnding">
                     <i:InvokeCommandAction
-                            Command="{Binding EditClient}"
-                            CommandParameter="{Binding Path=SelectedItem, 
-                                RelativeSource={RelativeSource Mode=FindAncestor, 
-                                AncestorType=DataGrid}}" />
+                        Command="{Binding EditClient}"
+                        CommandParameter="{Binding Path=SelectedItem, 
+                            RelativeSource={RelativeSource Mode=FindAncestor, 
+                            AncestorType=DataGrid}}" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="AddingNewItem">
+                    <i:InvokeCommandAction
+                        Command="{Binding AddNewClient}"
+                        CommandParameter="{Binding Path=SelectedItem, 
+                            RelativeSource={RelativeSource Mode=FindAncestor, 
+                            AncestorType=DataGrid}}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </DataGrid>

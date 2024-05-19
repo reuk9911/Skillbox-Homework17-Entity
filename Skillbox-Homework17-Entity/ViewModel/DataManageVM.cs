@@ -3,6 +3,7 @@ using Skillbox_Homework17_Entity.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,8 @@ namespace Skillbox_Homework17_Entity.ViewModel
             set
             {
                 allClients = value;
-                NotifyPropertyChanged(nameof(AllClients));
+                //NotifyPropertyChanged(nameof(AllClients));
+                
             }
         }
 
@@ -42,7 +44,7 @@ namespace Skillbox_Homework17_Entity.ViewModel
             set
             {
                 allPurchases = value;
-                NotifyPropertyChanged(nameof(AllPurchases));
+                //NotifyPropertyChanged(nameof(AllPurchases));
             }
         }
 
@@ -149,16 +151,32 @@ namespace Skillbox_Homework17_Entity.ViewModel
                     }
                     else
                     {
-                        resultStr = DataWorker.AddClient(
+                        resultStr = DataWorker.AddClientByForm(
                             ClientEmail, ClientLastName, ClientFirstName, ClientMiddleName, ClientPhone);
                         //MessageBox.Show(resultStr);
-                        allClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
+                        AllClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
 
                         wnd.Close();
                     }
                 });
             }
         }
+
+        //private RelayCommand addNewClient;
+        //public RelayCommand AddNewClient
+        //{
+        //    get
+        //    {
+        //        return addNewClient ?? new RelayCommand(obj =>
+        //        {
+        //            string resultStr = "";
+        //            Client newClient = obj as Client;
+        //            resultStr = DataWorker.AddClient(newClient);
+        //            allClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
+
+        //        });
+        //    }
+        //}
 
 
 
@@ -186,7 +204,6 @@ namespace Skillbox_Homework17_Entity.ViewModel
                 {
                     Client c = obj as Client;
                     string resultStr = DataWorker.EditClient(c);
-                    //MessageBox.Show(resultStr);
                     allClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
                 });
             }

@@ -1,12 +1,14 @@
 namespace Skillbox_Homework17_Entity.Model
 {
+    using Skillbox_Homework17_Entity.Utility;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Runtime.InteropServices;
 
-    public partial class Client
+    public partial class Client: ObservableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
@@ -14,24 +16,66 @@ namespace Skillbox_Homework17_Entity.Model
             Purchases = new HashSet<Purchase>();
         }
 
-        //[Required]
+        private string _lastName;
         [StringLength(20)]
-        public string lastName { get; set; }
+        public string lastName 
+        {
+            get { return _lastName; }
+            set 
+            {
+                _lastName = value;
+                base.RaisePropertyChangedEvent("lastName");
+            } 
+        }
 
-        //[Required]
+        private string _firstName;
         [StringLength(20)]
-        public string firstName { get; set; }
+        public string firstName
+        {
+            get { return _firstName; }
+            set
+            {
+                _firstName = value;
+                base.RaisePropertyChangedEvent("firstName");
+            }
+        }
 
-        //[Required]
+        private string _middleName;
         [StringLength(20)]
-        public string middleName { get; set; }
+        public string middleName
+        {
+            get { return _middleName; }
+            set
+            {
+                _middleName = value;
+                base.RaisePropertyChangedEvent("middleName");
+            }
+        }
 
+        private string _phone;
         [StringLength(12)]
-        public string phone { get; set; }
+        public string phone
+        {
+            get { return _phone; }
+            set
+            {
+                _phone = value;
+                base.RaisePropertyChangedEvent("phone");
+            }
+        }
 
+        private string _email;
         [Key]
         [StringLength(40)]
-        public string email { get; set; }
+        public string email
+        {
+            get { return _email; }
+            set
+            {
+                _email = value;
+                base.RaisePropertyChangedEvent("email");
+            }
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Purchase> Purchases { get; set; }
