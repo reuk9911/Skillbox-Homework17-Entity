@@ -3,12 +3,13 @@ namespace Skillbox_Homework17_Entity.Model
     using Skillbox_Homework17_Entity.Utility;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
     using System.Runtime.InteropServices;
 
-    public partial class Client : ObservableObject
+    public partial class Client: INotifyPropertyChanged/*: ObservableObject*/
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
@@ -26,7 +27,7 @@ namespace Skillbox_Homework17_Entity.Model
                 if (_lastName != value)
                 {
                     _lastName = value;
-                    base.RaisePropertyChangedEvent("lastName");
+                    RaisePropertyChangedEvent("lastName");
                 }
 
             }
@@ -42,7 +43,7 @@ namespace Skillbox_Homework17_Entity.Model
                 if (_firstName != value)
                 {
                     _firstName = value;
-                    base.RaisePropertyChangedEvent("firstName");
+                    RaisePropertyChangedEvent("firstName");
                 }
             }
         }
@@ -57,7 +58,7 @@ namespace Skillbox_Homework17_Entity.Model
                 if (_middleName != value)
                 {
                     _middleName = value;
-                    base.RaisePropertyChangedEvent("middleName");
+                    RaisePropertyChangedEvent("middleName");
                 }
             }
         }
@@ -72,12 +73,15 @@ namespace Skillbox_Homework17_Entity.Model
                 if (_phone != value)
                 {
                     _phone = value;
-                    base.RaisePropertyChangedEvent("phone");
+                    RaisePropertyChangedEvent("phone");
                 }
             }
         }
 
         private string _email;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         [Key]
         [StringLength(40)]
         public string email
@@ -88,12 +92,17 @@ namespace Skillbox_Homework17_Entity.Model
                 if (_email != value)
                 {
                     _email = value;
-                    base.RaisePropertyChangedEvent("email");
+                    RaisePropertyChangedEvent("email");
                 }
             }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Purchase> Purchases { get; set; }
+
+        protected void RaisePropertyChangedEvent(string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
