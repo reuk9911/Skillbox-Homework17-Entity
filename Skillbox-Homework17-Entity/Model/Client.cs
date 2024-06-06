@@ -8,7 +8,7 @@ namespace Skillbox_Homework17_Entity.Model
     using System.Data.Entity.Spatial;
     using System.Runtime.InteropServices;
 
-    public partial class Client: ObservableObject
+    public partial class Client : ObservableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
@@ -18,14 +18,18 @@ namespace Skillbox_Homework17_Entity.Model
 
         private string _lastName;
         [StringLength(20)]
-        public string lastName 
+        public string lastName
         {
             get { return _lastName; }
-            set 
+            set
             {
-                _lastName = value;
-                base.RaisePropertyChangedEvent("lastName");
-            } 
+                if (_lastName != value)
+                {
+                    _lastName = value;
+                    base.RaisePropertyChangedEvent("lastName");
+                }
+
+            }
         }
 
         private string _firstName;
@@ -35,8 +39,11 @@ namespace Skillbox_Homework17_Entity.Model
             get { return _firstName; }
             set
             {
-                _firstName = value;
-                base.RaisePropertyChangedEvent("firstName");
+                if (_firstName != value)
+                {
+                    _firstName = value;
+                    base.RaisePropertyChangedEvent("firstName");
+                }
             }
         }
 
@@ -47,8 +54,11 @@ namespace Skillbox_Homework17_Entity.Model
             get { return _middleName; }
             set
             {
-                _middleName = value;
-                base.RaisePropertyChangedEvent("middleName");
+                if (_middleName != value)
+                {
+                    _middleName = value;
+                    base.RaisePropertyChangedEvent("middleName");
+                }
             }
         }
 
@@ -59,8 +69,11 @@ namespace Skillbox_Homework17_Entity.Model
             get { return _phone; }
             set
             {
-                _phone = value;
-                base.RaisePropertyChangedEvent("phone");
+                if (_phone != value)
+                {
+                    _phone = value;
+                    base.RaisePropertyChangedEvent("phone");
+                }
             }
         }
 
@@ -72,8 +85,11 @@ namespace Skillbox_Homework17_Entity.Model
             get { return _email; }
             set
             {
-                _email = value;
-                base.RaisePropertyChangedEvent("email");
+                if (_email != value)
+                {
+                    _email = value;
+                    base.RaisePropertyChangedEvent("email");
+                }
             }
         }
 

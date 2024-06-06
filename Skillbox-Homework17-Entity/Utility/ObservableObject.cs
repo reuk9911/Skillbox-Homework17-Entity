@@ -21,13 +21,9 @@ namespace Skillbox_Homework17_Entity.Utility
         /// Raises the PropertyChanged event.
         /// </summary>
         /// <param name="propertyName">The name of the property that was changed.</param>
-        protected void RaisePropertyChangedEvent(string propertyName)
+        protected void RaisePropertyChangedEvent(string propertyName = "")
         {
-            if (PropertyChanged != null)
-            {
-                var e = new PropertyChangedEventArgs(propertyName);
-                PropertyChanged(this, e);
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

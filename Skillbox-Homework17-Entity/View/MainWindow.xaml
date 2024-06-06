@@ -11,7 +11,7 @@
     <Window.DataContext>
         <vm:DataManageVM/>
     </Window.DataContext>
-
+        
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -22,20 +22,20 @@
         <DataGrid x:Name="add" 
             Grid.Column="0" 
             Margin="5" 
-            ItemsSource="{Binding AllClients,  UpdateSourceTrigger=PropertyChanged}"
-            
+            ItemsSource="{Binding AllClients, Mode=TwoWay}"
             SelectionMode="Single" 
+
             AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Email" Binding="{Binding email, 
+                <DataGridTextColumn Header="Email" Binding="{Binding email, Mode=TwoWay,
                     UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding lastName, 
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding lastName, Mode=TwoWay,
                     UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Имя" Binding="{Binding firstName, 
+                <DataGridTextColumn Header="Имя" Binding="{Binding firstName, Mode=TwoWay,
                     UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Отчество" Binding="{Binding middleName, 
+                <DataGridTextColumn Header="Отчество" Binding="{Binding middleName, Mode=TwoWay, 
                     UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Телефон" Binding="{Binding phone, 
+                <DataGridTextColumn Header="Телефон" Binding="{Binding phone, Mode=TwoWay, 
                     UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
             <i:Interaction.Triggers>
@@ -57,6 +57,21 @@
         </DataGrid>
         <!-- *** ClientsGrid *** -->
 
+        <!--<ListBox
+            Grid.Column="0"
+            Margin="5" 
+            ItemsSource="{Binding AllClients, Mode=TwoWay}"
+            SelectionMode="Single">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock Text="{Binding Path=email}" HorizontalAlignment="Center" />
+                        <TextBlock Text="{Binding Path=phone}" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>-->
+
         <!--PurchasesGrid-->
         <DataGrid 
             Grid.Column="1" 
@@ -65,13 +80,13 @@
             SelectionMode="Single" 
             AutoGenerateColumns="False">
             <DataGrid.Columns>
-                
+
                 <DataGridTextColumn Header="Id" Binding="{Binding id}"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding email}"/>
                 <DataGridTextColumn Header="Код" Binding="{Binding productCode}"/>
                 <DataGridTextColumn Header="Наименование" Binding="{Binding productName}"/>
             </DataGrid.Columns>
-            
+
         </DataGrid>
         <!-- *** PurchasesGrid *** -->
 
