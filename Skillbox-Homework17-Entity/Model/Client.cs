@@ -9,7 +9,7 @@ namespace Skillbox_Homework17_Entity.Model
     using System.Data.Entity.Spatial;
     using System.Runtime.InteropServices;
 
-    public partial class Client: INotifyPropertyChanged/*: ObservableObject*/
+    public partial class Client : INotifyPropertyChanged/*: ObservableObject*/
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
@@ -104,5 +104,13 @@ namespace Skillbox_Homework17_Entity.Model
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-    }
+
+        public Client(string Email,
+            string LastName = "", string FirstName = "", string MiddleName = "", string Phone = "")
+        {
+
+        }
+
+    } 
+    
 }

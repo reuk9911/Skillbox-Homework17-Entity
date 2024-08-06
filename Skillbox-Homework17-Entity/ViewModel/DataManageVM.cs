@@ -14,25 +14,52 @@ using System.Windows.Media;
 using Skillbox_Homework17_Entity.Utility;
 using System.Windows.Data;
 using System.Security.Policy;
+using System.Windows.Navigation;
 
 namespace Skillbox_Homework17_Entity.ViewModel
 {
-    public class DataManageVM
+    public class DataManageVM : INotifyPropertyChanged
     {
         #region Поля и свойства
+
+        private Client selectedClient;
+        public Client SelectedClient
+        {
+            get { return selectedClient; }
+            set
+            {
+                if (selectedClient != value)
+                {
+                    selectedClient = value;
+                    ClientPurchases = new ObservableCollection<Purchase>(DataWorker.GetPurchasesByEmail(SelectedClient?.email));
+                    RaisePropertyChangedEvent("SelectedClient");
+                }
+            }
+        }
+
         private ObservableCollection<Client> allClients;
 
         /// <summary>
         /// все Клиенты
         /// </summary>
-        public ObservableCollection<Client> AllClients { get; set; }
+        public ObservableCollection<Client> AllClients
+        {
+            get { return allClients; }
+            set
+            {
+                if (allClients != value)
+                {
+                    allClients = value;
+                    RaisePropertyChangedEvent("AllClients");
+                }
+            }
+        }
 
-        private ObservableCollection<Purchase> allPurchases;
 
         /// <summary>
         /// все Клиенты
         /// </summary>
-        public ObservableCollection<Purchase> AllPurchases { get; set; }
+        public ObservableCollection<Purchase> ClientPurchases { get; set; }
 
         public string ClientEmail { get; set; }
         public string ClientFirstName { get; set; }
@@ -40,10 +67,21 @@ namespace Skillbox_Homework17_Entity.ViewModel
         public string ClientMiddleName { get; set; }
         public string ClientPhone { get; set; }
 
-        public string PurchaseClientEmail { get; set; }
+
+        public string PurchaseEmail { get; set; }
         public string PurchaseProductCode { get; set; }
         public string PurchaseProductName { get; set; }
 
+        #endregion
+
+        #region INPC
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChangedEvent(string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         #endregion
 
@@ -51,8 +89,8 @@ namespace Skillbox_Homework17_Entity.ViewModel
         public DataManageVM()
         {
             AllClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
-            AllPurchases = new ObservableCollection<Purchase>(DataWorker.GetAllPurchases());
-
+            ClientPurchases = new ObservableCollection<Purchase>(DataWorker.GetPurchasesByEmail(SelectedClient?.email));
+            
         }
         #endregion
 
@@ -66,6 +104,7 @@ namespace Skillbox_Homework17_Entity.ViewModel
 
         private void OpenAddNewPurchaseWindowMethod()
         {
+            PurchaseEmail = SelectedClient.email;
             AddNewPurchase newPurchaseWindow = new AddNewPurchase();
             SetCenterPositionAndOpen(newPurchaseWindow);
         }
@@ -91,7 +130,9 @@ namespace Skillbox_Homework17_Entity.ViewModel
                 return openAddNewClientWind ?? new RelayCommand(obj =>
                 {
                     OpenAddNewClientWindowMethod();
+                    AllClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
                 });
+
             }
         }
 
@@ -103,8 +144,10 @@ namespace Skillbox_Homework17_Entity.ViewModel
                 return openAddNewPurchaseWind ?? new RelayCommand(obj =>
                 {
                     OpenAddNewPurchaseWindowMethod();
-                }
-                );
+                    ClientPurchases = new ObservableCollection<Purchase>(DataWorker.GetPurchasesByEmail(SelectedClient?.email));
+
+                },
+            (obj) => obj!=null);
             }
         }
 
@@ -130,40 +173,11 @@ namespace Skillbox_Homework17_Entity.ViewModel
 
                         resultStr = DataWorker.AddClientByForm(
                             ClientEmail, ClientLastName, ClientFirstName, ClientMiddleName, ClientPhone);
-                        //MessageBox.Show(resultStr);
-                        
-                        Client newClient = new Client()
-                        {
-                            email = ClientEmail,
-                            firstName = ClientFirstName,
-                            lastName = ClientLastName,
-                            middleName = ClientMiddleName,
-                            phone = ClientPhone
-                        };
                         wnd.Close();
-                        AllClients.Add(newClient);
                     }
                 });
             }
         }
-
-        //private RelayCommand addNewClient;
-        //public RelayCommand AddNewClient
-        //{
-        //    get
-        //    {
-        //        return addNewClient ?? new RelayCommand(obj =>
-        //        {
-        //            string resultStr = "";
-        //            Client newClient = obj as Client;
-        //            resultStr = DataWorker.AddClient(newClient);
-        //            allClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
-
-        //        });
-        //    }
-        //}
-
-
 
         private RelayCommand addNewPurchase;
         public RelayCommand AddNewPurchase
@@ -172,6 +186,15 @@ namespace Skillbox_Homework17_Entity.ViewModel
             {
                 return addNewPurchase ?? new RelayCommand(obj =>
                 {
+                    Window wnd = obj as Window;
+                    string resultStr = "";
+                    if (PurchaseProductCode != "" && PurchaseProductName != "")
+                    {
+
+                        //resultStr = DataWorker.AddPurchaseByForm(PurchaseEmail, 
+                        //    PurchaseProductCode, PurchaseProductName);
+                        wnd.Close();
+                    }
                 });
             }
         }
@@ -181,6 +204,9 @@ namespace Skillbox_Homework17_Entity.ViewModel
         #region Команды редактирования
 
         private RelayCommand editClient;
+
+
+
         public RelayCommand EditClient
         {
             get
@@ -190,6 +216,27 @@ namespace Skillbox_Homework17_Entity.ViewModel
                     Client c = obj as Client;
                     string resultStr = DataWorker.EditClient(c);
                     allClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
+                });
+            }
+        }
+
+        #endregion
+
+        #region Команды удаления
+
+        private RelayCommand deleteClient;
+        public RelayCommand DeleteClient
+        {
+            get
+            {
+                return deleteClient ?? new RelayCommand(obj =>
+                {
+                    string resultStr = "";
+                    if (SelectedClient != null)
+                    {
+                        resultStr = DataWorker.DeleteClient(SelectedClient);
+                        AllClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
+                    }
                 });
             }
         }

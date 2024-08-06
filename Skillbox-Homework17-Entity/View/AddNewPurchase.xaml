@@ -21,8 +21,10 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Width="150">
-            <TextBlock Text="Email пользователя"/>
-            <ComboBox Text=""/>
+            <!--<TextBlock Text="Email пользователя"/>
+            <TextBox Text="{Binding Email}"/>-->
+            <Label Content="Email пользователя"/>
+            <Label Content="{Binding PurchaseEmail, Mode=TwoWay}"/>
             <TextBlock Text="Код продукта"/>
             <TextBox Text="{Binding PurchaseProductCode}"/>
             <TextBlock Text="Наименование продукта"/>

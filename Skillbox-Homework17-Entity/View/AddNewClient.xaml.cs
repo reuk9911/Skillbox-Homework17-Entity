@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Skillbox_Homework17_Entity.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

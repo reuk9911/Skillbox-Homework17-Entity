@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -69,7 +70,7 @@ namespace Skillbox_Homework17_Entity.Model
         /// <param name="ProductCode">Код продукта</param>
         /// <param name="ProductName">Наименование продукта</param>
         /// <returns></returns>
-        public static string AddPurchaseByForm(string Email, string ProductCode = "", string ProductName = "")
+        public static string AddPurchaseByForm(string Email, string ProductCode, string ProductName)
         {
             string result = "Клиента с данным Email не существует";
             using (ApplicationContext db = new ApplicationContext())
@@ -96,9 +97,12 @@ namespace Skillbox_Homework17_Entity.Model
             string result = "Такого клиента не существует!";
             using (ApplicationContext db = new ApplicationContext())
             {
-                db.Clients.Remove(client);
-                db.SaveChanges();
-                result = "Сделано!";
+                var recordToDelete = db.Clients.FirstOrDefault(e => e.email == client.email);
+                if (recordToDelete != null)
+                {
+                    db.Clients.Remove(recordToDelete);
+                    db.SaveChanges();
+                }
             }
             return result;
         }
