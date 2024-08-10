@@ -20,7 +20,7 @@ namespace Skillbox_Homework17_Entity.Model
         /// <param name="MiddleName">Отчество</param>
         /// <param name="Phone">Номер телефона</param>
         /// <returns></returns>
-        public static string AddClientByForm(string Email,
+        public static string AddClient(string Email,
             string LastName = "", string FirstName = "", string MiddleName = "", string Phone = "")
         {
             string result = "Клиент с данным Email уже существует";
@@ -70,20 +70,19 @@ namespace Skillbox_Homework17_Entity.Model
         /// <param name="ProductCode">Код продукта</param>
         /// <param name="ProductName">Наименование продукта</param>
         /// <returns></returns>
-        public static string AddPurchaseByForm(string Email, string ProductCode, string ProductName)
+        public static string AddPurchase(string Email, string ProductCode, string ProductName)
         {
             string result = "Клиента с данным Email не существует";
             using (ApplicationContext db = new ApplicationContext())
             {
                 bool CheckIsExist = db.Clients.Any(e => e.email == Email);
-                if (!CheckIsExist)
+                if (CheckIsExist)
                 {
-                    Purchase newPurchase = new Purchase()
-                    {
-                        email = Email,
-                        productCode = ProductCode,
-                        productName = ProductName
-                    };
+                    Purchase newPurchase = new Purchase();
+                    newPurchase.email = Email;
+                    newPurchase.Client = db.Clients.Where(e => e.email == Email).First<Client>();
+                    newPurchase.productCode = ProductCode;
+                    newPurchase.productName = ProductName;
                     db.Purchases.Add(newPurchase);
                     db.SaveChanges();
                     result = "Сделано!";

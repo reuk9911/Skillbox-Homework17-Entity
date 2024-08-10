@@ -89,14 +89,6 @@
     <Compile Include="View\MessageView.xaml.cs">
       <DependentUpon>MessageView.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\AddNewClient.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AddNewPurchase.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -111,12 +103,6 @@
     <Compile Include="Model\Purchase.cs" />
     <Compile Include="Model\RelayCommand.cs" />
     <Compile Include="ViewModel\DataManageVM.cs" />
-    <Compile Include="View\AddNewClient.xaml.cs">
-      <DependentUpon>AddNewClient.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AddNewPurchase.xaml.cs">
-      <DependentUpon>AddNewPurchase.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

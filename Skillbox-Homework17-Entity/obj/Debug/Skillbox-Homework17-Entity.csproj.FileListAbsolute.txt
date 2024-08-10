@@ -6,14 +6,10 @@ C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\bin\Debug\EntityFramework.xml
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\Skillbox-Homework17-Entity.csproj.AssemblyReference.cache
-C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\View\AddNewClient.g.cs
-C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\View\AddNewPurchase.g.cs
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\View\MainWindow.g.cs
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\App.g.cs
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\Skillbox-Homework17-Entity_MarkupCompile.cache
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\Skillbox-Homework17-Entity_MarkupCompile.lref
-C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\View\AddNewClient.baml
-C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\View\AddNewPurchase.baml
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\View\MainWindow.baml
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\Skillbox-Homework17-Entity.g.resources
 C:\Users\reuk\source\repos\Skillbox-Homework17-Entity\Skillbox-Homework17-Entity\obj\Debug\Skillbox_Homework17_Entity.Properties.Resources.resources

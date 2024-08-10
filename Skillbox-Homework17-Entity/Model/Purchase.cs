@@ -14,18 +14,7 @@ namespace Skillbox_Homework17_Entity.Model
         private string _productCode;
         private string _productName;
 
-        public int id
-        {
-            get { return _id; }
-            set
-            {
-                if (id != value)
-                {
-                    id = value;
-                    RaisePropertyChangedEvent("id");
-                }
-            }
-        }
+        public int id { get; set; }
 
         [Required]
         [StringLength(40)]
