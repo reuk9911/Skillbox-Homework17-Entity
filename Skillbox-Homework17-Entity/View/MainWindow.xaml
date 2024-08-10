@@ -48,13 +48,13 @@
                             RelativeSource={RelativeSource Mode=FindAncestor, 
                             AncestorType=DataGrid}}" />
                 </i:EventTrigger>
-                <i:EventTrigger EventName="AddingNewItem">
+                <!--<i:EventTrigger EventName="AddingNewItem">
                     <i:InvokeCommandAction
                         Command="{Binding AddNewClient}"
                         CommandParameter="{Binding Path=SelectedItem, 
                             RelativeSource={RelativeSource Mode=FindAncestor, 
                             AncestorType=DataGrid}}" />
-                </i:EventTrigger>
+                </i:EventTrigger>-->
             </i:Interaction.Triggers>
         </DataGrid>
         <!-- *** ClientsGrid *** -->
@@ -77,7 +77,15 @@
                 <DataGridTextColumn Header="Наименование" Binding="{Binding productName, Mode=TwoWay,
                     UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
-
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="RowEditEnding">
+                    <i:InvokeCommandAction
+            Command="{Binding EditPurchase}"
+            CommandParameter="{Binding Path=SelectedItem, 
+                RelativeSource={RelativeSource Mode=FindAncestor, 
+                AncestorType=DataGrid}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </DataGrid>
         <!-- *** PurchasesGrid *** -->
 

@@ -191,8 +191,6 @@ namespace Skillbox_Homework17_Entity.ViewModel
 
         private RelayCommand editClient;
 
-
-
         public RelayCommand EditClient
         {
             get
@@ -200,11 +198,27 @@ namespace Skillbox_Homework17_Entity.ViewModel
                 return editClient ?? new RelayCommand(obj =>
                 {
                     Client c = obj as Client;
-                    string resultStr = DataWorker.EditClient(c);
+                    Message = DataWorker.EditClient(c);
                     allClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
                 });
             }
         }
+
+        private RelayCommand editPurchase;
+
+        public RelayCommand EditPurchase
+        {
+            get
+            {
+                return editPurchase ?? new RelayCommand(obj =>
+                {
+                    Purchase p = obj as Purchase;
+                    Message = DataWorker.EditPurchase(p);
+                    //ClientPurchases = new ObservableCollection<Purchase>(DataWorker.GetPurchasesByEmail(SelectedClient?.email));
+                });
+            }
+        }
+
 
         #endregion
 

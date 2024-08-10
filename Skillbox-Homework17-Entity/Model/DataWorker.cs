@@ -137,16 +137,16 @@ namespace Skillbox_Homework17_Entity.Model
             return result;
         }
 
-        public static string EditPurchase(Client OldPurchase, string ProductCode, string ProductName)
+        public static string EditPurchase(Purchase EditedPurchase)
         {
             string result = "Такого покупки не существует";
             using (ApplicationContext db = new ApplicationContext())
             {
-                Purchase purchase = db.Purchases.FirstOrDefault(e => e.email == OldPurchase.email);
+                Purchase purchase = db.Purchases.FirstOrDefault(e => e.id == EditedPurchase.id);
                 if (purchase != null)
                 {
-                    purchase.productCode = ProductCode;
-                    purchase.productName = ProductName;
+                    purchase.productCode = EditedPurchase.productCode;
+                    purchase.productName = EditedPurchase.productName;
                     db.SaveChanges();
                     result = "Сделано!";
                 }
