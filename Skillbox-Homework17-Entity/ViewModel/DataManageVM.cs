@@ -42,6 +42,21 @@ namespace Skillbox_Homework17_Entity.ViewModel
             }
         }
 
+        private Purchase selectedPurchase;
+
+        public Purchase SelectedPurchase
+        {
+            get { return selectedPurchase; }
+            set
+            {
+                if (selectedPurchase != value)
+                {
+                    selectedPurchase = value;
+                    RaisePropertyChangedEvent("SelectedPurchase");
+                }
+            }
+        }
+
         private ObservableCollection<Client> allClients;
 
         /// <summary>
@@ -146,6 +161,9 @@ namespace Skillbox_Homework17_Entity.ViewModel
         #region Команды Добавления
 
         private RelayCommand addNewClient;
+        /// <summary>
+        /// Добавление нового клиента
+        /// </summary>
         public RelayCommand AddNewClient
         {
             get
@@ -167,6 +185,9 @@ namespace Skillbox_Homework17_Entity.ViewModel
         }
 
         private RelayCommand addNewPurchase;
+        /// <summary>
+        /// Добавление новой покупки клиенту
+        /// </summary>
         public RelayCommand AddNewPurchase
         {
             get
@@ -190,7 +211,9 @@ namespace Skillbox_Homework17_Entity.ViewModel
         #region Команды редактирования
 
         private RelayCommand editClient;
-
+        /// <summary>
+        /// Редактировние клиента
+        /// </summary>
         public RelayCommand EditClient
         {
             get
@@ -199,13 +222,15 @@ namespace Skillbox_Homework17_Entity.ViewModel
                 {
                     Client c = obj as Client;
                     Message = DataWorker.EditClient(c);
-                    allClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
+                    AllClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
                 });
             }
         }
 
         private RelayCommand editPurchase;
-
+        /// <summary>
+        /// Редактирование покупки
+        /// </summary>
         public RelayCommand EditPurchase
         {
             get
@@ -214,7 +239,7 @@ namespace Skillbox_Homework17_Entity.ViewModel
                 {
                     Purchase p = obj as Purchase;
                     Message = DataWorker.EditPurchase(p);
-                    //ClientPurchases = new ObservableCollection<Purchase>(DataWorker.GetPurchasesByEmail(SelectedClient?.email));
+                    ClientPurchases = new ObservableCollection<Purchase>(DataWorker.GetPurchasesByEmail(SelectedClient?.email));
                 });
             }
         }
@@ -225,6 +250,9 @@ namespace Skillbox_Homework17_Entity.ViewModel
         #region Команды удаления
 
         private RelayCommand deleteClient;
+        /// <summary>
+        /// Удаление клиента
+        /// </summary>
         public RelayCommand DeleteClient
         {
             get
@@ -236,7 +264,28 @@ namespace Skillbox_Homework17_Entity.ViewModel
                         Message = DataWorker.DeleteClient(SelectedClient);
                         AllClients = new ObservableCollection<Client>(DataWorker.GetAllClients());
                     }
-                });
+                },
+            (obj) => obj != null);
+            }
+        }
+
+        private RelayCommand deletePurchase;
+        /// <summary>
+        /// Удаление покупку
+        /// </summary>
+        public RelayCommand DeletePurchase
+        {
+            get
+            {
+                return deletePurchase ?? new RelayCommand(obj =>
+                {
+                    if (SelectedPurchase != null)
+                    {
+                        Message = DataWorker.DeletePurchase(SelectedPurchase);
+                        ClientPurchases = new ObservableCollection<Purchase>(DataWorker.GetPurchasesByEmail(SelectedClient?.email));
+                    }
+                },
+            (obj) => obj != null);
             }
         }
 

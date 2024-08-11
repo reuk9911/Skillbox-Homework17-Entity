@@ -7,17 +7,16 @@
         xmlns:vm="clr-namespace:Skillbox_Homework17_Entity.ViewModel"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1200">
+        Title="MainWindow" Height="600" Width="1000">
     <Window.DataContext>
         <vm:DataManageVM/>
     </Window.DataContext>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <!-- ClientsGrid -->
         <DataGrid x:Name="add" 
@@ -65,12 +64,13 @@
             Margin="5" 
             ItemsSource="{Binding ClientPurchases}"
             SelectionMode="Single" 
-            AutoGenerateColumns="False">
+            AutoGenerateColumns="False"
+            SelectedItem="{Binding SelectedPurchase, Mode=TwoWay}">
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="Id" Binding="{Binding id, Mode=TwoWay,
                     UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Email" Binding="{Binding email, Mode=TwoWay,
+                <DataGridTextColumn Header="User email" Binding="{Binding email, Mode=TwoWay,
                     UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Код" Binding="{Binding productCode, Mode=TwoWay,
                     UpdateSourceTrigger=PropertyChanged}"/>
@@ -93,7 +93,9 @@
             Grid.Column="2" 
             Margin="5"
             Orientation="Vertical">
-            <TextBlock Text="Email"/>
+            
+            <TextBlock 
+                Text="Email"/>
             <TextBox 
                 Name="EmailBlock"
                 Text="{Binding ClientEmail}"/>
@@ -107,20 +109,13 @@
             <TextBox Text="{Binding ClientPhone}"/>
 
             <Button 
-                Content="Добавить Клиента" 
+                Content="Добавить клиента" 
                 Command="{Binding AddNewClient}"/>
 
             <Button 
-                Content="Удалить Клиента" 
-                Command="{Binding DeleteClient}"/>
-
-        </StackPanel>
-
-        <StackPanel 
-            Grid.Column="3"
-            Margin="5"
-            Orientation="Vertical">
-
+                Content="Удалить клиента" 
+                Command="{Binding DeleteClient}"
+                CommandParameter="{Binding SelectedClient}"/>
             <TextBlock Text="Email пользователя"/>
             <TextBlock Text="{Binding SelectedClient.email}"/>
             <TextBlock Text="Код продукта"/>
@@ -128,12 +123,15 @@
             <TextBlock Text="Наименование продукта"/>
             <TextBox Text="{Binding PurchaseProductName}"/>
             <Button 
-            Grid.Row="1" 
-            Content="Добавить"
-            Command="{Binding AddNewPurchase}"
+                Content="Добавить покупку"
+                Command="{Binding AddNewPurchase}"
                 CommandParameter="{Binding SelectedClient}"/>
-
+            <Button 
+                Content="Удалить покупку" 
+                Command="{Binding DeletePurchase}"
+                CommandParameter="{Binding SelectedPurchase}"/>
 
         </StackPanel>
+
     </Grid>
 </Window>

@@ -19,11 +19,11 @@ namespace Skillbox_Homework17_Entity.Model
         /// <param name="FirstName">Имя</param>
         /// <param name="MiddleName">Отчество</param>
         /// <param name="Phone">Номер телефона</param>
-        /// <returns></returns>
+        /// <returns>Результат операции</returns>
         public static string AddClient(string Email,
             string LastName = "", string FirstName = "", string MiddleName = "", string Phone = "")
         {
-            string result = "Клиент с данным Email уже существует";
+            string result = "";
             using (ApplicationContext db = new ApplicationContext())
             {
                 bool CheckIsExist = db.Clients.Any(e => e.email == Email);
@@ -41,26 +41,11 @@ namespace Skillbox_Homework17_Entity.Model
                     db.SaveChanges();
                     result = "Сделано!";
                 }
+                else
+                    result = "Клиент с данным Email уже существует";
                 return result;
             }
         }
-
-        //public static string AddClient(Client NewClient)
-        //{
-        //    string result = "Клиент с данным Email уже существует";
-        //    using (ApplicationContext db = new ApplicationContext())
-        //    {
-        //        bool CheckIsExist = db.Clients.Any(e => e.email == NewClient.email);
-        //        if (!CheckIsExist)
-        //        {
-                    
-        //            db.Clients.Add(NewClient);
-        //            db.SaveChanges();
-        //            result = "Сделано!";
-        //        }
-        //        return result;
-        //    }
-        //}
 
 
         /// <summary>
@@ -69,10 +54,10 @@ namespace Skillbox_Homework17_Entity.Model
         /// <param name="Email">Email клиента</param>
         /// <param name="ProductCode">Код продукта</param>
         /// <param name="ProductName">Наименование продукта</param>
-        /// <returns></returns>
+        /// <returns>Результат операции</returns>
         public static string AddPurchase(string Email, string ProductCode, string ProductName)
         {
-            string result = "Клиента с данным Email не существует";
+            string result = "";
             using (ApplicationContext db = new ApplicationContext())
             {
                 bool CheckIsExist = db.Clients.Any(e => e.email == Email);
@@ -87,13 +72,20 @@ namespace Skillbox_Homework17_Entity.Model
                     db.SaveChanges();
                     result = "Сделано!";
                 }
+                else
+                    result = "Клиента с данным Email не существует";
                 return result;
             }
         }
 
+        /// <summary>
+        /// Удаление клиента
+        /// </summary>
+        /// <param name="client">Клиент</param>
+        /// <returns>Результат операции</returns>
         public static string DeleteClient(Client client)
         {
-            string result = "Такого клиента не существует!";
+            string result = "";
             using (ApplicationContext db = new ApplicationContext())
             {
                 var recordToDelete = db.Clients.FirstOrDefault(e => e.email == client.email);
@@ -101,26 +93,46 @@ namespace Skillbox_Homework17_Entity.Model
                 {
                     db.Clients.Remove(recordToDelete);
                     db.SaveChanges();
+                    result = "Сделано!";
                 }
+                else
+                    result = "Такого клиента не существует!";
             }
             return result;
         }
 
+        /// <summary>
+        /// Удаление покупки
+        /// </summary>
+        /// <param name="purchase">Покупка</param>
+        /// <returns>Результат операции</returns>
         public static string DeletePurchase(Purchase purchase)
         {
-            string result = "Такой покупки не существует!";
+            string result = "";
             using (ApplicationContext db = new ApplicationContext())
             {
-                db.Purchases.Remove(purchase);
-                db.SaveChanges();
-                result = "Сделано!";
+                var recordToDelete = db.Purchases.FirstOrDefault(e => e.id == purchase.id);
+                if (recordToDelete != null)
+                {
+
+                    db.Purchases.Remove(recordToDelete);
+                    db.SaveChanges();
+                    result = "Сделано!";
+                }
+                else
+                    result = "Такой покупки не существует!";
             }
             return result;
         }
 
+        /// <summary>
+        /// Редактирование Клиента
+        /// </summary>
+        /// <param name="EditedClient">Клиент</param>
+        /// <returns>Результат операции</returns>
         public static string EditClient(Client EditedClient)
         {
-            string result = "Такого клиента не существует";
+            string result="";
             using (ApplicationContext db = new ApplicationContext())
             {
                 Client client = db.Clients.FirstOrDefault(e => e.email == EditedClient.email);
@@ -133,13 +145,21 @@ namespace Skillbox_Homework17_Entity.Model
                     db.SaveChanges();
                     result = "Сделано!";
                 }
+                else 
+                    result = "Такого клиента не существует";
+
             }
             return result;
         }
 
+        /// <summary>
+        /// Редактирование покупки
+        /// </summary>
+        /// <param name="EditedPurchase">Покупка</param>
+        /// <returns>Результат операции</returns>
         public static string EditPurchase(Purchase EditedPurchase)
         {
-            string result = "Такого покупки не существует";
+            string result = "";
             using (ApplicationContext db = new ApplicationContext())
             {
                 Purchase purchase = db.Purchases.FirstOrDefault(e => e.id == EditedPurchase.id);
@@ -150,10 +170,16 @@ namespace Skillbox_Homework17_Entity.Model
                     db.SaveChanges();
                     result = "Сделано!";
                 }
+                else
+                    result = "Покупки с таким id не существует";
             }
             return result;
         }
 
+        /// <summary>
+        /// Получает из БД всех клиентов
+        /// </summary>
+        /// <returns>Клиенты</returns>
         public static List<Client> GetAllClients()
         {
             using (ApplicationContext db = new ApplicationContext())
@@ -163,6 +189,10 @@ namespace Skillbox_Homework17_Entity.Model
             }
         }
 
+        /// <summary>
+        /// Получает из БД все покупки
+        /// </summary>
+        /// <returns>Покупки</returns>
         public static List<Purchase> GetAllPurchases()
         {
             using (ApplicationContext db = new ApplicationContext())
@@ -172,6 +202,11 @@ namespace Skillbox_Homework17_Entity.Model
             }
         }
 
+
+        /// <summary>
+        /// Получает из БД все покупки по Email пользователя
+        /// </summary>
+        /// <returns>Покупки</returns>
         public static List<Purchase> GetPurchasesByEmail(string Email)
         {
             using (ApplicationContext db = new ApplicationContext())
